@@ -253,6 +253,12 @@ export default function Home() {
             >
               📞 Contact
             </button>
+            <Link 
+              href="/policies"
+              className={`px-4 py-2 rounded-lg font-medium transition-colors text-gray-600 hover:text-blue-600`}
+            >
+              📋 Policies
+            </Link>
           </div>
         </div>
       </nav>
