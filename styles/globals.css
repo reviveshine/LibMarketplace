@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.liberian-gradient { 
+  background: linear-gradient(135deg, #0052CC 0%, #FFFFFF 50%, #CC0000 100%); 
+}
+
+.cart-badge { 
+  animation: pulse 2s infinite; 
+}
+
+.product-card { 
+  transition: all 0.3s ease; 
+}
+
+.product-card:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+}
+
+/* Liberian flag color theme */
+:root {
+  --liberian-blue: #0052CC;
+  --liberian-red: #CC0000;
+  --liberian-white: #FFFFFF;
+}

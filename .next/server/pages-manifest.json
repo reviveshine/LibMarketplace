@@ -1,0 +1,9 @@
+{
+  "/_error": "pages/_error.js",
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/login": "pages/login.js",
+  "/": "pages/index.js",
+  "/buyer-dashboard": "pages/buyer-dashboard.js",
+  "/admin-panel": "pages/admin-panel.js"
+}
