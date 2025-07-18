@@ -1,0 +1,629 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibMarketplace - Authentic Liberian Products | RSH001 Global Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .liberian-gradient { background: linear-gradient(135deg, #0052CC 0%, #FFFFFF 50%, #CC0000 100%); }
+        .cart-badge { animation: pulse 2s infinite; }
+        .product-card { transition: all 0.3s ease; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .hero-bg { background: linear-gradient(rgba(0,82,204,0.8), rgba(204,0,0,0.8)); }
+    </style>
+</head>
+<body class="bg-gray-50" x-data="libMarketplace()">
+    <!-- Header -->
+    <header class="liberian-gradient shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="text-3xl">🇱🇷</div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">LibMarketplace</h1>
+                        <p class="text-sm text-gray-200">Authentic Liberian Products Worldwide</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <button @click="showCart = true" class="text-white hover:text-gray-200 relative">
+                        <i class="fas fa-shopping-cart text-2xl"></i>
+                        <span x-show="cartItems.length > 0" x-text="cartItems.length" 
+                              class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs cart-badge"></span>
+                    </button>
+                    <button @click="showMessages = true" class="text-white hover:text-gray-200">
+                        <i class="fas fa-comments text-2xl"></i>
+                    </button>
+                    <div class="text-white text-center">
+                        <div class="font-semibold">reviveshine</div>
+                        <div class="text-xs bg-blue-800 px-2 py-1 rounded">RSH001</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="text-6xl mb-4">🇱🇷</div>
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">Welcome to LibMarketplace</h2>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                Discover authentic Liberian products from Nimba County. Supporting local artisans and sharing our rich culture with the world.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button @click="currentSection = 'products'" 
+                        class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    🛍️ Shop Now - 6 Products Available
+                </button>
+                <button @click="showMessages = true" 
+                        class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                    💬 Chat with RSH001
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-20 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-8">
+                <button @click="currentSection = 'products'" 
+                        :class="currentSection === 'products' ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-600'"
+                        class="py-4 px-2 hover:text-blue-600 transition-colors">🛍️ Shop Products</button>
+                <button @click="currentSection = 'about'" 
+                        :class="currentSection === 'about' ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-600'"
+                        class="py-4 px-2 hover:text-blue-600 transition-colors">ℹ️ About RSH001</button>
+                <button @click="currentSection = 'contact'" 
+                        :class="currentSection === 'contact' ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-600'"
+                        class="py-4 px-2 hover:text-blue-600 transition-colors">📞 Contact</button>
+                <button @click="currentSection = 'shipping'" 
+                        :class="currentSection === 'shipping' ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-600'"
+                        class="py-4 px-2 hover:text-blue-600 transition-colors">🚚 Shipping</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Products Section -->
+        <div x-show="currentSection === 'products'" class="space-y-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">🇱🇷 Authentic Liberian Products</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-4">
+                    Discover genuine products from Nimba County, Liberia. Each item represents our rich cultural heritage.
+                </p>
+                <div class="bg-green-100 border border-green-400 rounded-lg p-4 max-w-2xl mx-auto">
+                    <p class="text-green-800 font-semibold">
+                        ✅ Verified Seller: reviveshine (RSH001) | 🌍 Worldwide Shipping | 💯 Authenticity Guaranteed
+                    </p>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="product in products" :key="product.id">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden product-card">
+                        <div class="relative">
+                            <img :src="product.image" :alt="product.name" class="w-full h-48 object-cover">
+                            <div class="absolute top-2 right-2 bg-green-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                                ✅ Authentic
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2" x-text="product.name"></h3>
+                            <p class="text-gray-600 mb-4 text-sm" x-text="product.description"></p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-2xl font-bold text-blue-600" x-text="'$' + product.price"></span>
+                                <span class="text-sm text-gray-500" x-text="'Stock: ' + product.stock"></span>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button @click="addToCart(product)" 
+                                        class="flex-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
+                                    <i class="fas fa-cart-plus mr-2"></i>Add to Cart
+                                </button>
+                                <button @click="messageAboutProduct(product)" 
+                                        class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors">
+                                    <i class="fas fa-comment mr-2"></i>Ask
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div x-show="currentSection === 'about'" class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center mb-8">
+                    <div class="text-6xl mb-4">🇱🇷</div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">About reviveshine (RSH001)</h2>
+                    <div class="bg-blue-100 inline-block px-4 py-2 rounded-lg mb-4">
+                        <span class="text-blue-800 font-semibold">✅ Verified Seller ID: RSH001</span>
+                    </div>
+                    <div class="bg-green-100 inline-block px-4 py-2 rounded-lg">
+                        <span class="text-green-800 font-semibold">📅 Member Since: January 2025</span>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">🏡 From Nimba County</h3>
+                        <p class="text-gray-600 mb-6">
+                            Based in the heart of Nimba County, Liberia, I specialize in sourcing authentic Liberian products 
+                            for customers worldwide. Every item represents our rich cultural heritage.
+                        </p>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">🌍 Global Mission</h3>
+                        <p class="text-gray-600">
+                            My mission is to bridge Liberian artisans with global customers, ensuring authentic 
+                            Liberian culture reaches every corner of the world while supporting local communities.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">✅ Quality Guarantee</h3>
+                        <ul class="text-gray-600 space-y-2 mb-6">
+                            <li>• 100% Authentic Liberian products</li>
+                            <li>• Direct sourcing from local artisans</li>
+                            <li>• Quality inspected before shipping</li>
+                            <li>• Worldwide shipping available</li>
+                            <li>• Customer satisfaction guaranteed</li>
+                        </ul>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">📞 Contact Information</h3>
+                        <div class="text-gray-600 space-y-2">
+                            <p>📧 reviveshine@mylibmarketplace.com</p>
+                            <p>🌐 mylibmarketplace.com</p>
+                            <p>📍 Nimba County, Liberia</p>
+                            <p>🕒 Available 24/7 for inquiries</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div x-show="currentSection === 'contact'" class="max-w-2xl mx-auto">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">📞 Contact reviveshine (RSH001)</h2>
+                
+                <form @submit.prevent="sendMessage" class="space-y-6">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Your Name</label>
+                        <input x-model="contactForm.name" type="text" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+                        <input x-model="contactForm.email" type="email" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Subject</label>
+                        <select x-model="contactForm.subject" 
+                                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                            <option value="">Select a subject</option>
+                            <option value="product-inquiry">Product Inquiry</option>
+                            <option value="custom-order">Custom Order Request</option>
+                            <option value="shipping">Shipping Question</option>
+                            <option value="wholesale">Wholesale Partnership</option>
+                            <option value="general">General Question</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Message</label>
+                        <textarea x-model="contactForm.message" rows="5" required 
+                                  placeholder="Tell me about your inquiry..."
+                                  class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"></textarea>
+                    </div>
+                    <button type="submit" 
+                            class="w-full bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-paper-plane mr-2"></i>Send Message to RSH001
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Shipping Section -->
+        <div x-show="currentSection === 'shipping'" class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">🚚 Shipping Information</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">🌍 Worldwide Shipping</h3>
+                        <p class="text-gray-600 mb-4">
+                            We ship authentic Liberian products from Nimba County to customers worldwide.
+                        </p>
+                        
+                        <div class="space-y-3">
+                            <div class="border rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-semibold">📮 Standard Shipping</span>
+                                    <span class="text-blue-600 font-bold">$15-25</span>
+                                </div>
+                                <p class="text-sm text-gray-600">14-21 business days | Tracking included</p>
+                            </div>
+                            <div class="border rounded-lg p-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-semibold">⚡ Express Shipping</span>
+                                    <span class="text-blue-600 font-bold">$35-50</span>
+                                </div>
+                                <p class="text-sm text-gray-600">7-10 business days | Priority handling</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">📍 Shipping Destinations</h3>
+                        <div class="grid grid-cols-2 gap-2 text-sm mb-6">
+                            <div class="bg-green-100 p-2 rounded text-center">🇺🇸 United States</div>
+                            <div class="bg-green-100 p-2 rounded text-center">🇨🇦 Canada</div>
+                            <div class="bg-green-100 p-2 rounded text-center">🇬🇧 United Kingdom</div>
+                            <div class="bg-green-100 p-2 rounded text-center">🇩🇪 Germany</div>
+                            <div class="bg-blue-100 p-2 rounded text-center col-span-2">+ 150 more countries</div>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">📋 Important Notes</h3>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li>• Customs duties may apply in destination country</li>
+                            <li>• Tracking number provided within 24 hours</li>
+                            <li>• Insurance included on all shipments</li>
+                            <li>• Free shipping on orders over $200</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Shopping Cart Modal -->
+    <div x-show="showCart" @click.away="showCart = false" 
+         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">🛒 Shopping Cart</h3>
+                    <button @click="showCart = false" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div x-show="cartItems.length === 0" class="text-center py-8">
+                    <div class="text-6xl mb-4">🛒</div>
+                    <p class="text-gray-600 mb-4">Your cart is empty</p>
+                    <button @click="showCart = false; currentSection = 'products'" 
+                            class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                        Continue Shopping
+                    </button>
+                </div>
+                
+                <div x-show="cartItems.length > 0">
+                    <div class="space-y-4 mb-6">
+                        <template x-for="item in cartItems" :key="item.id">
+                            <div class="flex items-center justify-between border-b pb-4">
+                                <div class="flex items-center space-x-4">
+                                    <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded">
+                                    <div>
+                                        <h4 class="font-semibold" x-text="item.name"></h4>
+                                        <p class="text-gray-600" x-text="'$' + item.price + ' each'"></p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button @click="updateQuantity(item.id, item.quantity - 1)" 
+                                            class="bg-gray-200 px-2 py-1 rounded hover:bg-gray-300">-</button>
+                                    <span x-text="item.quantity" class="px-2 font-semibold"></span>
+                                    <button @click="updateQuantity(item.id, item.quantity + 1)" 
+                                            class="bg-gray-200 px-2 py-1 rounded hover:bg-gray-300">+</button>
+                                    <button @click="removeFromCart(item.id)" 
+                                            class="text-red-600 hover:text-red-800 ml-4">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    
+                    <div class="border-t pt-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xl font-bold">Total: $<span x-text="cartTotal"></span></span>
+                        </div>
+                        <button @click="checkout()" 
+                                class="w-full bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 transition-colors">
+                            <i class="fas fa-credit-card mr-2"></i>Contact RSH001 for Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Messages Modal -->
+    <div x-show="showMessages" @click.away="showMessages = false" 
+         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-96">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">💬 Chat with RSH001</h3>
+                    <button @click="showMessages = false" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-4 max-h-64 overflow-y-auto mb-4">
+                    <template x-for="message in messages" :key="message.id">
+                        <div class="border rounded-lg p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="font-semibold text-blue-600" x-text="message.from"></span>
+                                <span class="text-sm text-gray-500" x-text="message.time"></span>
+                            </div>
+                            <p class="text-gray-700" x-text="message.text"></p>
+                        </div>
+                    </template>
+                </div>
+                
+                <div class="flex space-x-2">
+                    <input x-model="newMessage" @keyup.enter="sendQuickMessage()" 
+                           placeholder="Type your message..." 
+                           class="flex-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                    <button @click="sendQuickMessage()" 
+                            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">🇱🇷 LibMarketplace</h3>
+                    <p class="text-gray-300">
+                        Authentic Liberian products from Nimba County to the world. 
+                        Supporting local artisans and sharing our rich culture globally.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">📞 Contact RSH001</h3>
+                    <div class="text-gray-300 space-y-2">
+                        <p>📧 reviveshine@mylibmarketplace.com</p>
+                        <p>🌐 mylibmarketplace.com</p>
+                        <p>📍 Nimba County, Liberia</p>
+                        <p class="text-green-400">🟢 Online Now</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">✅ Guarantees</h3>
+                    <div class="text-gray-300 space-y-2">
+                        <p>🏆 100% Authentic products</p>
+                        <p>😊 Customer satisfaction</p>
+                        <p>🚚 Worldwide shipping</p>
+                        <p>📞 24/7 support</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">
+                    © 2025 LibMarketplace | Powered by reviveshine (RSH001) | 
+                    Bringing Liberian Excellence to the World 🇱🇷🌍
+                </p>
+                <p class="text-sm text-gray-400 mt-2">
+                    Built: 2025-07-17 03:27:30 UTC | Version: Final Enhanced | Status: Ready for Upload
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function libMarketplace() {
+            return {
+                currentSection: 'products',
+                showCart: false,
+                showMessages: false,
+                newMessage: '',
+                cartItems: [],
+                contactForm: {
+                    name: '',
+                    email: '',
+                    subject: '',
+                    message: ''
+                },
+                products: [
+                    {
+                        id: 1,
+                        name: 'Traditional Liberian Kente Cloth',
+                        description: 'Handwoven authentic kente cloth from skilled Liberian artisans. Perfect for ceremonies or decoration.',
+                        price: 89.99,
+                        stock: 15,
+                        image: 'https://images.unsplash.com/photo-1515378791036-0648a814c963?w=300&h=200&fit=crop'
+                    },
+                    {
+                        id: 2,
+                        name: 'Nimba County Premium Coffee',
+                        description: 'Premium arabica coffee beans grown in the mountains of Nimba County. Rich, smooth flavor.',
+                        price: 24.99,
+                        stock: 50,
+                        image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=300&h=200&fit=crop'
+                    },
+                    {
+                        id: 3,
+                        name: 'Hand-Carved Wooden Elephant',
+                        description: 'Beautiful elephant sculpture representing Liberian wildlife and traditional craftsmanship.',
+                        price: 45.00,
+                        stock: 8,
+                        image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop'
+                    },
+                    {
+                        id: 4,
+                        name: 'Pure Liberian Red Palm Oil',
+                        description: 'Authentic red palm oil from Liberian palm trees. Perfect for traditional cooking.',
+                        price: 19.99,
+                        stock: 30,
+                        image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=300&h=200&fit=crop'
+                    },
+                    {
+                        id: 5,
+                        name: 'Traditional Liberian Talking Drum',
+                        description: 'Authentic talking drum handcrafted by local musicians. Great for music enthusiasts.',
+                        price: 125.00,
+                        stock: 5,
+                        image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=200&fit=crop'
+                    },
+                    {
+                        id: 6,
+                        name: 'Liberian Flag Pride Jewelry Set',
+                        description: 'Beautiful jewelry set featuring Liberian flag colors. Perfect for showing national pride.',
+                        price: 35.99,
+                        stock: 20,
+                        image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&h=200&fit=crop'
+                    }
+                ],
+                messages: [
+                    {
+                        id: 1,
+                        from: 'reviveshine (RSH001)',
+                        text: 'Welcome to LibMarketplace! I\'m online and ready to help you find authentic Liberian products. How can I assist you today?',
+                        time: '2 hours ago'
+                    },
+                    {
+                        id: 2,
+                        from: 'System',
+                        text: 'Browse our 6 authentic products or message RSH001 directly for custom orders and bulk pricing.',
+                        time: '1 hour ago'
+                    }
+                ],
+
+                get cartTotal() {
+                    return this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
+                },
+
+                addToCart(product) {
+                    const existingItem = this.cartItems.find(item => item.id === product.id);
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        this.cartItems.push({...product, quantity: 1});
+                    }
+                    
+                    // Show success notification
+                    this.showNotification(`${product.name} added to cart!`);
+                },
+
+                removeFromCart(productId) {
+                    this.cartItems = this.cartItems.filter(item => item.id !== productId);
+                },
+
+                updateQuantity(productId, newQuantity) {
+                    if (newQuantity <= 0) {
+                        this.removeFromCart(productId);
+                        return;
+                    }
+                    
+                    const item = this.cartItems.find(item => item.id === productId);
+                    if (item) {
+                        item.quantity = newQuantity;
+                    }
+                },
+
+                checkout() {
+                    if (this.cartItems.length === 0) return;
+                    
+                    alert(`Order inquiry sent to RSH001! Total: $${this.cartTotal}. You'll be contacted within 24 hours with payment options and shipping details. Thank you for choosing LibMarketplace!`);
+                    
+                    // Add confirmation message
+                    this.messages.unshift({
+                        id: Date.now(),
+                        from: 'reviveshine (RSH001)',
+                        text: `Order inquiry received! Total: $${this.cartTotal}. I'll send you payment options and shipping details within 24 hours. Thank you!`,
+                        time: 'just now'
+                    });
+                    
+                    this.cartItems = [];
+                    this.showCart = false;
+                },
+
+                messageAboutProduct(product) {
+                    this.showMessages = true;
+                    this.messages.unshift({
+                        id: Date.now(),
+                        from: 'You',
+                        text: `Hi RSH001, I'm interested in the ${product.name}. Can you tell me more about it?`,
+                        time: 'just now'
+                    });
+                    
+                    // Auto-reply from seller
+                    setTimeout(() => {
+                        this.messages.unshift({
+                            id: Date.now() + 1,
+                            from: 'reviveshine (RSH001)',
+                            text: `Great choice! The ${product.name} is one of our most popular items. It's handcrafted in Nimba County. Would you like to know about shipping options or bulk pricing?`,
+                            time: 'just now'
+                        });
+                    }, 2000);
+                },
+
+                sendQuickMessage() {
+                    if (!this.newMessage.trim()) return;
+                    
+                    this.messages.unshift({
+                        id: Date.now(),
+                        from: 'You',
+                        text: this.newMessage,
+                        time: 'just now'
+                    });
+                    
+                    this.newMessage = '';
+                    
+                    // Auto-reply from seller
+                    setTimeout(() => {
+                        this.messages.unshift({
+                            id: Date.now() + 1,
+                            from: 'reviveshine (RSH001)',
+                            text: 'Thank you for your message! I\'m here to help with any questions about our authentic Liberian products.',
+                            time: 'just now'
+                        });
+                    }, 1500);
+                },
+
+                sendMessage() {
+                    alert(`Thank you ${this.contactForm.name}! Your message has been sent to reviveshine (RSH001). You'll receive a response within 24 hours.`);
+                    
+                    this.contactForm = {
+                        name: '',
+                        email: '',
+                        subject: '',
+                        message: ''
+                    };
+                    
+                    this.messages.unshift({
+                        id: Date.now(),
+                        from: 'Contact Form',
+                        text: 'New contact form submission received. RSH001 will respond within 24 hours.',
+                        time: 'just now'
+                    });
+                },
+
+                showNotification(text) {
+                    const notification = document.createElement('div');
+                    notification.className = 'fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg text-white bg-green-600';
+                    notification.textContent = text;
+                    document.body.appendChild(notification);
+                    
+                    setTimeout(() => {
+                        if (document.body.contains(notification)) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 3000);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
