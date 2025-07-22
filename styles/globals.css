@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.liberian-gradient { 
+  background: linear-gradient(135deg, #0052CC 0%, #FFFFFF 50%, #CC0000 100%); 
+}
+
+.cart-badge { 
+  animation: pulse 2s infinite; 
+}
+
+.product-card { 
+  transition: all 0.3s ease; 
+}
+
+.product-card:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+}
+
+/* Additional utility classes for the marketplace */
+.btn-primary {
+  @apply bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors;
+}
+
+.btn-success {
+  @apply bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors;
+}
+
+.input-field {
+  @apply w-full px-3 py-2 border rounded focus:border-blue-500 focus:outline-none;
+}
