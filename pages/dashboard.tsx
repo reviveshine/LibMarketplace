@@ -2,52 +2,44 @@ import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
+import { useAuth } from '../contexts/AppContext'
+import { PageLoading } from '../components/Loading'
 
 export default function Dashboard() {
-  const [user, setUser] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
+  const { user, isAuthenticated } = useAuth()
 
   useEffect(() => {
     // Check authentication
-    const userData = localStorage.getItem('user')
-    if (!userData) {
+    if (!isAuthenticated) {
       router.push('/auth/login')
       return
     }
 
-    const parsedUser = JSON.parse(userData)
-    setUser(parsedUser)
     setLoading(false)
 
     // Redirect to appropriate dashboard based on user type
-    switch (parsedUser.type) {
-      case 'seller':
-        router.push('/seller/dashboard')
-        break
-      case 'buyer':
-        router.push('/buyer/dashboard')
-        break
-      case 'admin':
-        router.push('/admin/dashboard')
-        break
-      default:
-        // Stay on general dashboard
-        break
+    if (user) {
+      switch (user.type) {
+        case 'seller':
+          router.push('/seller/dashboard')
+          break
+        case 'buyer':
+          router.push('/buyer/dashboard')
+          break
+        case 'admin':
+          router.push('/admin/dashboard')
+          break
+        default:
+          // Stay on general dashboard
+          break
+      }
     }
-  }, [router])
+  }, [router, user, isAuthenticated])
 
   if (loading) {
-    return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <i className="fas fa-spinner fa-spin text-4xl text-blue-600 mb-4"></i>
-            <p className="text-gray-600">Loading your dashboard...</p>
-          </div>
-        </div>
-      </Layout>
-    )
+    return <PageLoading message="Loading your dashboard..." />
   }
 
   if (!user) {

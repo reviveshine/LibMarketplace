@@ -1,9 +1,9 @@
-import { useState } from 'react'
 import Head from 'next/head'
 import Layout from '../components/Layout'
+import { useCart, useWishlist, Product } from '../contexts/AppContext'
 
 // Mock data - will be replaced with database
-const products = [
+const products: Product[] = [
   { id: 1, name: 'Traditional Kente Cloth', description: 'Handwoven authentic kente cloth from Liberian artisans', price: 89.99, stock: 15, image: 'https://images.unsplash.com/photo-1515378791036-0648a814c963?w=300&h=200&fit=crop' },
   { id: 2, name: 'Nimba County Coffee', description: 'Premium arabica coffee beans from Nimba mountains', price: 24.99, stock: 50, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=300&h=200&fit=crop' },
   { id: 3, name: 'Carved Wooden Elephant', description: 'Beautiful elephant sculpture representing Liberian wildlife', price: 45.00, stock: 8, image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop' },
@@ -12,57 +12,16 @@ const products = [
   { id: 6, name: 'Liberian Flag Jewelry', description: 'Beautiful jewelry featuring Liberian flag colors', price: 35.99, stock: 20, image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&h=200&fit=crop' }
 ]
 
-interface Product {
-  id: number
-  name: string
-  description: string
-  price: number
-  stock: number
-  image: string
-}
-
-interface CartItem extends Product {
-  quantity: number
-}
-
 export default function Home() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
-  const [showCart, setShowCart] = useState(false)
+  const { addToCart } = useCart()
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist()
 
-  const addToCart = (product: Product) => {
-    const existing = cartItems.find(item => item.id === product.id)
-    if (existing) {
-      setCartItems(cartItems.map(item => 
-        item.id === product.id 
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      ))
+  const handleWishlistToggle = (product: Product) => {
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id)
     } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }])
+      addToWishlist(product)
     }
-  }
-
-  const removeFromCart = (productId: number) => {
-    setCartItems(cartItems.filter(item => item.id !== productId))
-  }
-
-  const updateQuantity = (productId: number, newQuantity: number) => {
-    if (newQuantity <= 0) {
-      removeFromCart(productId)
-      return
-    }
-    setCartItems(cartItems.map(item =>
-      item.id === productId ? { ...item, quantity: newQuantity } : item
-    ))
-  }
-
-  const cartTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
-
-  const checkout = () => {
-    alert(`Order placed! Total: $${cartTotal}. You will be redirected to complete registration and verification.`)
-    setCartItems([])
-    setShowCart(false)
-    // TODO: Redirect to auth/register if not logged in
   }
 
   return (
@@ -109,6 +68,16 @@ export default function Home() {
                   >
                     <i className="fas fa-cart-plus mr-2"></i>Add to Cart
                   </button>
+                  <button 
+                    onClick={() => handleWishlistToggle(product)}
+                    className={`px-3 py-2 rounded ${
+                      isInWishlist(product.id) 
+                        ? 'bg-red-600 text-white hover:bg-red-700' 
+                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    }`}
+                  >
+                    <i className={`fas ${isInWishlist(product.id) ? 'fa-heart' : 'fa-heart-o'}`}></i>
+                  </button>
                   <button className="btn-success">
                     <i className="fas fa-comment mr-2"></i>Ask
                   </button>
@@ -118,74 +87,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* Cart Modal */}
-      {showCart && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold">🛒 Shopping Cart</h3>
-                <button 
-                  onClick={() => setShowCart(false)} 
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <i className="fas fa-times text-xl"></i>
-                </button>
-              </div>
-              
-              {cartItems.length === 0 ? (
-                <div className="text-center py-8">
-                  <div className="text-6xl mb-4">🛒</div>
-                  <p className="text-gray-600">Your cart is empty</p>
-                </div>
-              ) : (
-                <>
-                  <div className="space-y-4 mb-6">
-                    {cartItems.map((item) => (
-                      <div key={item.id} className="flex items-center justify-between border-b pb-4">
-                        <div>
-                          <h4 className="font-semibold">{item.name}</h4>
-                          <p className="text-gray-600">${item.price}</p>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <button 
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)} 
-                            className="bg-gray-200 px-2 py-1 rounded"
-                          >
-                            -
-                          </button>
-                          <span>{item.quantity}</span>
-                          <button 
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)} 
-                            className="bg-gray-200 px-2 py-1 rounded"
-                          >
-                            +
-                          </button>
-                          <button 
-                            onClick={() => removeFromCart(item.id)} 
-                            className="text-red-600 ml-4"
-                          >
-                            <i className="fas fa-trash"></i>
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="border-t pt-4">
-                    <div className="flex justify-between items-center mb-4">
-                      <span className="text-xl font-bold">Total: ${cartTotal}</span>
-                    </div>
-                    <button onClick={checkout} className="w-full btn-success">
-                      <i className="fas fa-credit-card mr-2"></i>Proceed to Checkout
-                    </button>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </Layout>
   )
 }

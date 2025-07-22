@@ -3,6 +3,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout'
+import { useAuth } from '../../contexts/AppContext'
+import { LoadingButton } from '../../components/Loading'
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -13,6 +15,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
+  const { login } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,15 +32,16 @@ export default function Login() {
         await new Promise(resolve => setTimeout(resolve, 1000))
         
         // Mock successful login
-        localStorage.setItem('user', JSON.stringify({
+        const user = {
           id: 1,
           email: formData.email,
           name: 'John Doe',
-          type: 'buyer',
+          type: 'buyer' as const,
           userId: 'BUY001',
           verified: true
-        }))
+        }
         
+        login(user)
         router.push('/dashboard')
       } else {
         setError('Please fill in all fields')
@@ -140,18 +144,14 @@ export default function Login() {
             </div>
 
             <div>
-              <button
+              <LoadingButton
                 type="submit"
-                disabled={loading}
-                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+                isLoading={loading}
+                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
-                {loading ? (
-                  <i className="fas fa-spinner fa-spin mr-2"></i>
-                ) : (
-                  <i className="fas fa-sign-in-alt mr-2"></i>
-                )}
+                {!loading && <i className="fas fa-sign-in-alt mr-2"></i>}
                 {loading ? 'Signing in...' : 'Sign in'}
-              </button>
+              </LoadingButton>
             </div>
 
             <div className="text-center">
