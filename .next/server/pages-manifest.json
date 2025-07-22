@@ -1,10 +1,1 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/auth/register": "pages/auth/register.js",
-  "/auth/login": "pages/auth/login.js",
-  "/dashboard": "pages/dashboard.js",
-  "/seller/dashboard": "pages/seller/dashboard.js",
-  "/buyer/dashboard": "pages/buyer/dashboard.js"
-}
+{"/_app":"pages/_app.js","/_error":"pages/_error.js","/about":"pages/about.html","/admin/dashboard":"pages/admin/dashboard.html","/auth/login":"pages/auth/login.html","/auth/register":"pages/auth/register.html","/auth/verify":"pages/auth/verify.html","/buyer/dashboard":"pages/buyer/dashboard.html","/contact":"pages/contact.html","/dashboard":"pages/dashboard.html","/":"pages/index.html","/products/[id]":"pages/products/[id].html","/profile":"pages/profile.html","/seller/dashboard":"pages/seller/dashboard.html","/wishlist":"pages/wishlist.html","/_document":"pages/_document.js","/404":"pages/404.html"}
