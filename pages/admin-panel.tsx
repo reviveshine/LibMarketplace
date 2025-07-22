@@ -87,7 +87,7 @@ export default function AdminPanel() {
         email: 'newseller@example.com',
         type: 'seller',
         status: 'pending',
-        sellerId: 'RSH002',
+        sellerId: 'LMP002',
         phone: '+231-555-0003',
         address: 'Bong County, Liberia',
         createdAt: '2024-01-18'
@@ -121,7 +121,7 @@ export default function AdminPanel() {
         name: 'Artisan Basket',
         description: 'Handwoven basket made from local materials',
         price: 35.00,
-        sellerId: 'RSH002',
+        sellerId: 'LMP002',
         sellerName: 'New Seller',
         status: 'pending',
         createdAt: '2024-01-18'

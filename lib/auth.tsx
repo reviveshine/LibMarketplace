@@ -29,9 +29,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Check for existing session
-    const savedUser = localStorage.getItem('libmarketplace_user')
-    if (savedUser) {
-      setUser(JSON.parse(savedUser))
+    if (typeof window !== 'undefined') {
+      const savedUser = localStorage.getItem('libmarketplace_user')
+      if (savedUser) {
+        setUser(JSON.parse(savedUser))
+      }
     }
     setIsLoading(false)
   }, [])
@@ -76,7 +78,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const foundUser = demoUsers.find(u => u.email === email)
     if (foundUser && password === 'demo123') {
       setUser(foundUser)
-      localStorage.setItem('libmarketplace_user', JSON.stringify(foundUser))
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('libmarketplace_user', JSON.stringify(foundUser))
+      }
       setIsLoading(false)
       return true
     }
@@ -106,14 +110,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     // In a real app, this would make an API call
     setUser(newUser)
-    localStorage.setItem('libmarketplace_user', JSON.stringify(newUser))
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('libmarketplace_user', JSON.stringify(newUser))
+    }
     setIsLoading(false)
     return true
   }
 
   const logout = () => {
     setUser(null)
-    localStorage.removeItem('libmarketplace_user')
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('libmarketplace_user')
+    }
   }
 
   return (
