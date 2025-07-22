@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useAuth } from '../lib/auth'
 import { useRouter } from 'next/router'
+import { useToast } from '../lib/toast'
 
 interface Product {
   id: number;
@@ -30,6 +31,7 @@ interface Offer {
 export default function BuyerDashboard() {
   const { user, logout } = useAuth()
   const router = useRouter()
+  const { showToast } = useToast()
   const [activeTab, setActiveTab] = useState('browse')
   const [products, setProducts] = useState<Product[]>([])
   const [myOffers, setMyOffers] = useState<Offer[]>([])
@@ -110,11 +112,18 @@ export default function BuyerDashboard() {
     setMyOffers([newOffer, ...myOffers])
     setOfferForm({ price: '', message: '' })
     setSelectedProduct(null)
-    alert('Offer sent successfully!')
+    showToast('Offer sent successfully!', 'success')
   }
 
   if (!user || user.type !== 'buyer') {
-    return <div>Loading...</div>
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading dashboard...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -397,7 +406,7 @@ export default function BuyerDashboard() {
                   onClick={() => setSelectedProduct(null)}
                   className="text-gray-500 hover:text-gray-700"
                 >
-                  <i className="fas fa-times text-xl"></i>
+                  <span className="text-xl">✖️</span>
                 </button>
               </div>
               

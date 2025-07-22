@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useAuth } from '../lib/auth'
+import { useToast } from '../lib/toast'
 
 interface Product {
   id: number;
@@ -25,6 +26,7 @@ interface Message {
 
 export default function Home() {
   const { user, logout } = useAuth()
+  const { showToast } = useToast()
   const [currentSection, setCurrentSection] = useState('home')
   const [showCart, setShowCart] = useState(false)
   const [showMessages, setShowMessages] = useState(false)
@@ -86,7 +88,7 @@ export default function Home() {
   }
 
   const checkout = () => {
-    alert(`Order placed! Total: $${cartTotal}. LibMarketplace will contact you within 24 hours.`)
+    showToast(`Order placed! Total: $${cartTotal}. LibMarketplace will contact you within 24 hours.`, 'success')
     setCartItems([])
     setShowCart(false)
   }
@@ -114,7 +116,7 @@ export default function Home() {
 
   const sendMessage = (e: React.FormEvent) => {
     e.preventDefault()
-    alert(`Thank you ${contactForm.name}! Message sent to LibMarketplace support.`)
+    showToast(`Thank you ${contactForm.name}! Message sent to LibMarketplace support.`, 'success')
     setContactForm({ name: '', email: '', message: '' })
   }
 
@@ -124,7 +126,6 @@ export default function Home() {
         <title>LibMarketplace - Authentic Liberian Products</title>
         <meta name="description" content="Authentic Liberian Products Worldwide" />
         <link rel="icon" href="/favicon.ico" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
       </Head>
 
       {/* Header */}
@@ -140,7 +141,7 @@ export default function Home() {
             </div>
             <div className="flex items-center space-x-6">
               <button onClick={() => setShowCart(true)} className="text-white hover:text-gray-200 relative">
-                <i className="fas fa-shopping-cart text-2xl"></i>
+                <span className="text-2xl">🛒</span>
                 {cartItems.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs cart-badge">
                     {cartItems.length}
@@ -148,7 +149,7 @@ export default function Home() {
                 )}
               </button>
               <button onClick={() => setShowMessages(true)} className="text-white hover:text-gray-200">
-                <i className="fas fa-comments text-2xl"></i>
+                <span className="text-2xl">💬</span>
               </button>
               {user ? (
                 <div className="flex items-center space-x-4">
@@ -391,7 +392,7 @@ export default function Home() {
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold">🛒 Shopping Cart</h3>
                 <button onClick={() => setShowCart(false)} className="text-gray-500 hover:text-gray-700">
-                  <i className="fas fa-times text-xl"></i>
+                  <span className="text-xl">✖️</span>
                 </button>
               </div>
               {cartItems.length === 0 ? (
@@ -456,7 +457,7 @@ export default function Home() {
               <div className="flex justify-between items-center">
                 <h3 className="text-xl font-bold">💬 Messages</h3>
                 <button onClick={() => setShowMessages(false)} className="text-gray-500 hover:text-gray-700">
-                  <i className="fas fa-times text-xl"></i>
+                  <span className="text-xl">✖️</span>
                 </button>
               </div>
             </div>
