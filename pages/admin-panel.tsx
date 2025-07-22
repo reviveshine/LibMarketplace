@@ -61,11 +61,11 @@ export default function AdminPanel() {
     const demoUsers: User[] = [
       {
         id: '1',
-        name: 'reviveshine',
+        name: 'LibMarketplace',
         email: 'reviveshine@mylibmarketplace.com',
         type: 'seller',
         status: 'verified',
-        sellerId: 'RSH001',
+        sellerId: 'LMP001',
         phone: '+231-555-0001',
         address: 'Nimba County, Liberia',
         createdAt: '2024-01-15'
@@ -111,8 +111,8 @@ export default function AdminPanel() {
         name: 'Traditional Kente Cloth',
         description: 'Handwoven authentic kente cloth from Liberian artisans',
         price: 89.99,
-        sellerId: 'RSH001',
-        sellerName: 'reviveshine',
+        sellerId: 'LMP001',
+        sellerName: 'LibMarketplace',
         status: 'active',
         createdAt: '2024-01-16'
       },

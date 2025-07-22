@@ -60,10 +60,10 @@ export default function BuyerDashboard() {
   const loadBuyerData = () => {
     // Demo data - in real app, fetch from API
     const demoProducts: Product[] = [
-      { id: 1, name: 'Traditional Kente Cloth', description: 'Handwoven authentic kente cloth from Liberian artisans', price: 89.99, stock: 15, image: 'https://images.unsplash.com/photo-1515378791036-0648a814c963?w=300&h=200&fit=crop', sellerId: 'RSH001', sellerName: 'reviveshine' },
-      { id: 2, name: 'Nimba County Coffee', description: 'Premium arabica coffee beans from Nimba mountains', price: 24.99, stock: 50, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=300&h=200&fit=crop', sellerId: 'RSH001', sellerName: 'reviveshine' },
-      { id: 3, name: 'Carved Wooden Elephant', description: 'Beautiful elephant sculpture representing Liberian wildlife', price: 45.00, stock: 8, image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop', sellerId: 'RSH001', sellerName: 'reviveshine' },
-      { id: 4, name: 'Pure Palm Oil', description: 'Authentic red palm oil from Liberian palm trees', price: 19.99, stock: 30, image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=300&h=200&fit=crop', sellerId: 'RSH001', sellerName: 'reviveshine' },
+      { id: 1, name: 'Traditional Kente Cloth', description: 'Handwoven authentic kente cloth from Liberian artisans', price: 89.99, stock: 15, image: 'https://images.unsplash.com/photo-1515378791036-0648a814c963?w=300&h=200&fit=crop', sellerId: 'LMP001', sellerName: 'LibMarketplace' },
+      { id: 2, name: 'Nimba County Coffee', description: 'Premium arabica coffee beans from Nimba mountains', price: 24.99, stock: 50, image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=300&h=200&fit=crop', sellerId: 'LMP001', sellerName: 'LibMarketplace' },
+      { id: 3, name: 'Carved Wooden Elephant', description: 'Beautiful elephant sculpture representing Liberian wildlife', price: 45.00, stock: 8, image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop', sellerId: 'LMP001', sellerName: 'LibMarketplace' },
+      { id: 4, name: 'Pure Palm Oil', description: 'Authentic red palm oil from Liberian palm trees', price: 19.99, stock: 30, image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=300&h=200&fit=crop', sellerId: 'LMP001', sellerName: 'LibMarketplace' },
     ]
 
     const demoOffers: Offer[] = [
@@ -71,8 +71,8 @@ export default function BuyerDashboard() {
         id: 1,
         productId: 1,
         productName: 'Traditional Kente Cloth',
-        sellerId: 'RSH001',
-        sellerName: 'reviveshine',
+        sellerId: 'LMP001',
+        sellerName: 'LibMarketplace',
         originalPrice: 89.99,
         offerPrice: 75.00,
         status: 'pending',

@@ -46,8 +46,8 @@ export default function Home() {
   ]
 
   const [messages, setMessages] = useState<Message[]>([
-    { id: 1, from: 'reviveshine (RSH001)', text: 'Welcome! How can I help you find authentic Liberian products?', time: '2 hours ago' },
-    { id: 2, from: 'System', text: 'Browse products or message RSH001 directly for inquiries.', time: '1 hour ago' }
+    { id: 1, from: 'LibMarketplace Support', text: 'Welcome! How can we help you find authentic Liberian products?', time: '2 hours ago' },
+    { id: 2, from: 'System', text: 'Browse products or contact LibMarketplace support for inquiries.', time: '1 hour ago' }
   ])
 
   const cartTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
@@ -86,7 +86,7 @@ export default function Home() {
   }
 
   const checkout = () => {
-    alert(`Order placed! Total: $${cartTotal}. RSH001 will contact you within 24 hours.`)
+    alert(`Order placed! Total: $${cartTotal}. LibMarketplace will contact you within 24 hours.`)
     setCartItems([])
     setShowCart(false)
   }
@@ -114,14 +114,14 @@ export default function Home() {
 
   const sendMessage = (e: React.FormEvent) => {
     e.preventDefault()
-    alert(`Thank you ${contactForm.name}! Message sent to RSH001.`)
+    alert(`Thank you ${contactForm.name}! Message sent to LibMarketplace support.`)
     setContactForm({ name: '', email: '', message: '' })
   }
 
   return (
     <div className="bg-gray-50">
       <Head>
-        <title>LibMarketplace - Authentic Liberian Products | RSH001</title>
+        <title>LibMarketplace - Authentic Liberian Products</title>
         <meta name="description" content="Authentic Liberian Products Worldwide" />
         <link rel="icon" href="/favicon.ico" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
@@ -307,9 +307,9 @@ export default function Home() {
             <div className="bg-white rounded-lg shadow-lg p-8">
               <div className="text-center mb-8">
                 <div className="text-6xl mb-4">🇱🇷</div>
-                <h2 className="text-3xl font-bold mb-4">About reviveshine (RSH001)</h2>
+                <h2 className="text-3xl font-bold mb-4">About LibMarketplace</h2>
                 <div className="bg-blue-100 inline-block px-4 py-2 rounded">
-                  <span className="text-blue-800 font-semibold">✅ Verified Seller ID: RSH001</span>
+                  <span className="text-blue-800 font-semibold">✅ Authentic Liberian Marketplace</span>
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-8">
@@ -329,7 +329,7 @@ export default function Home() {
                     <li>• Customer satisfaction guaranteed</li>
                   </ul>
                   <h3 className="text-xl font-semibold mb-4">📞 Contact</h3>
-                  <p className="text-gray-600">📧 reviveshine@mylibmarketplace.com</p>
+                  <p className="text-gray-600">📧 support@mylibmarketplace.com</p>
                   <p className="text-gray-600">🌐 mylibmarketplace.com</p>
                   <p className="text-gray-600">📍 Nimba County, Liberia</p>
                 </div>
@@ -342,7 +342,7 @@ export default function Home() {
         {currentSection === 'contact' && (
           <div className="max-w-2xl mx-auto">
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-3xl font-bold text-center mb-6">📞 Contact reviveshine</h2>
+              <h2 className="text-3xl font-bold text-center mb-6">📞 Contact LibMarketplace</h2>
               <form onSubmit={sendMessage} className="space-y-6">
                 <div>
                   <label className="block text-gray-700 text-sm font-bold mb-2">Your Name</label>

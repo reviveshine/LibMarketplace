@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LibMarketplace - Authentic Liberian Products | RSH001</title>
+    <title>LibMarketplace - Authentic Liberian Products</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -36,7 +36,7 @@
                     </button>
                     <div class="text-white text-center">
                         <div class="font-semibold">reviveshine</div>
-                        <div class="text-xs bg-blue-800 px-2 py-1 rounded">RSH001</div>
+                        <div class="text-xs bg-blue-800 px-2 py-1 rounded">LMP001</div>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                         class="py-4 px-2 hover:text-blue-600">🛍️ Shop Products</button>
                 <button @click="currentSection = 'about'" 
                         :class="currentSection === 'about' ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-600'"
-                        class="py-4 px-2 hover:text-blue-600">ℹ️ About RSH001</button>
+                        class="py-4 px-2 hover:text-blue-600">ℹ️ About LibMarketplace</button>
                 <button @click="currentSection = 'contact'" 
                         :class="currentSection === 'contact' ? 'border-b-2 border-blue-600 text-blue-600' : 'text-gray-600'"
                         class="py-4 px-2 hover:text-blue-600">📞 Contact</button>
@@ -101,9 +101,9 @@
             <div class="bg-white rounded-lg shadow-lg p-8">
                 <div class="text-center mb-8">
                     <div class="text-6xl mb-4">🇱🇷</div>
-                    <h2 class="text-3xl font-bold mb-4">About reviveshine (RSH001)</h2>
+                    <h2 class="text-3xl font-bold mb-4">About LibMarketplace</h2>
                     <div class="bg-blue-100 inline-block px-4 py-2 rounded">
-                        <span class="text-blue-800 font-semibold">✅ Verified Seller ID: RSH001</span>
+                        <span class="text-blue-800 font-semibold">✅ Authentic Liberian Marketplace</span>
                     </div>
                 </div>
                 <div class="grid md:grid-cols-2 gap-8">
@@ -232,7 +232,7 @@
         <div class="container mx-auto px-4 text-center">
             <h3 class="text-xl font-bold mb-4">🇱🇷 LibMarketplace</h3>
             <p class="text-gray-300 mb-4">Authentic Liberian products from Nimba County to the world</p>
-            <p class="text-gray-400">© 2025 LibMarketplace | Powered by reviveshine (RSH001)</p>
+            <p class="text-gray-400">© 2025 LibMarketplace | Authentic Liberian Products Worldwide</p>
             <p class="text-sm text-gray-500 mt-2">Built: 2025-07-17 03:21:12 UTC | Ready for Global Customers</p>
         </div>
     </footer>
@@ -255,8 +255,8 @@
                     { id: 6, name: 'Liberian Flag Jewelry', description: 'Beautiful jewelry featuring Liberian flag colors', price: 35.99, stock: 20, image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&h=200&fit=crop' }
                 ],
                 messages: [
-                    { id: 1, from: 'reviveshine (RSH001)', text: 'Welcome! How can I help you find authentic Liberian products?', time: '2 hours ago' },
-                    { id: 2, from: 'System', text: 'Browse products or message RSH001 directly for inquiries.', time: '1 hour ago' }
+                    { id: 1, from: 'LibMarketplace Support', text: 'Welcome! How can we help you find authentic Liberian products?', time: '2 hours ago' },
+                    { id: 2, from: 'System', text: 'Browse products or contact LibMarketplace support for inquiries.', time: '1 hour ago' }
                 ],
                 get cartTotal() {
                     return this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
@@ -281,7 +281,7 @@
                     if (item) item.quantity = newQuantity;
                 },
                 checkout() {
-                    alert(`Order placed! Total: $${this.cartTotal}. RSH001 will contact you within 24 hours.`);
+                    alert(`Order placed! Total: $${this.cartTotal}. LibMarketplace will contact you within 24 hours.`);
                     this.cartItems = [];
                     this.showCart = false;
                 },
@@ -305,7 +305,7 @@
                     this.newMessage = '';
                 },
                 sendMessage() {
-                    alert(`Thank you ${this.contactForm.name}! Message sent to RSH001.`);
+                    alert(`Thank you ${this.contactForm.name}! Message sent to LibMarketplace support.`);
                     this.contactForm = { name: '', email: '', message: '' };
                 }
             }

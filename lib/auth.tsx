@@ -43,11 +43,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const demoUsers = [
       {
         id: '1',
-        name: 'reviveshine',
+        name: 'LibMarketplace',
         email: 'reviveshine@mylibmarketplace.com',
         type: 'seller' as const,
         status: 'verified' as const,
-        sellerId: 'RSH001',
+        sellerId: 'LMP001',
         phone: '+231-555-0001',
         address: 'Nimba County, Liberia'
       },
@@ -90,7 +90,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     
     // Generate ID based on user type
     const userId = Date.now().toString()
-    const typePrefix = userData.type === 'seller' ? 'RSH' : 'BUY'
+    const typePrefix = userData.type === 'seller' ? 'LMP' : 'BUY'
     const generatedId = `${typePrefix}${String(Date.now()).slice(-3)}`
 
     const newUser: User = {
