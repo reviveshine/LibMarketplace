@@ -95,7 +95,7 @@ export default function BuyerDashboard() {
     if (!selectedProduct) return
 
     const newOffer: Offer = {
-      id: Date.now(),
+      id: crypto.randomUUID(),
       productId: selectedProduct.id,
       productName: selectedProduct.name,
       sellerId: selectedProduct.sellerId,
