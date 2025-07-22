@@ -21,7 +21,7 @@
 
 /* Additional utility classes for the marketplace */
 .btn-primary {
-  @apply bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors;
+  @apply bg-liberian-blue text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors;
 }
 
 .btn-secondary {
@@ -38,4 +38,19 @@
 
 .input-field {
   @apply w-full px-3 py-2 border rounded focus:border-blue-500 focus:outline-none;
+}
+
+/* Text truncation utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
