@@ -45,6 +45,11 @@ export default function Header() {
               {user ? (
                 <>
                   {/* Authenticated user navigation */}
+                  <Link href="/wishlist" className="text-white hover:text-gray-200 relative">
+                    <i className="fas fa-heart text-2xl"></i>
+                    {/* TODO: Add wishlist count badge */}
+                  </Link>
+                  
                   <button 
                     onClick={() => setShowCart(true)} 
                     className="text-white hover:text-gray-200 relative"
@@ -79,6 +84,9 @@ export default function Header() {
                       </Link>
                       <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                         <i className="fas fa-user mr-2"></i>Profile
+                      </Link>
+                      <Link href="/wishlist" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        <i className="fas fa-heart mr-2"></i>Wishlist
                       </Link>
                       <Link href="/orders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                         <i className="fas fa-box mr-2"></i>Orders
