@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/YasXpBgPT_brlI0Xn89kT/_buildManifest.js",
-    "static/YasXpBgPT_brlI0Xn89kT/_ssgManifest.js"
+    "static/meJwsdUHXn1OQgHvM4cTj/_buildManifest.js",
+    "static/meJwsdUHXn1OQgHvM4cTj/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
@@ -22,7 +22,7 @@
       "static/chunks/webpack-8fa1640cc84ba8fe.js",
       "static/chunks/framework-64ad27b21261a9ce.js",
       "static/chunks/main-3c9b553960c0fed5.js",
-      "static/css/0924d1890456f9d2.css",
+      "static/css/cd7cf176fb0d0b6d.css",
       "static/chunks/pages/_app-072d09c5366dfca6.js"
     ],
     "/_error": [
@@ -71,7 +71,8 @@
       "static/chunks/framework-64ad27b21261a9ce.js",
       "static/chunks/main-3c9b553960c0fed5.js",
       "static/chunks/424-ca7471161a310844.js",
-      "static/chunks/pages/buyer/dashboard-6581137ec4273185.js"
+      "static/chunks/349-0449e3da443b5b73.js",
+      "static/chunks/pages/buyer/dashboard-a85e3a4dceff8370.js"
     ],
     "/cart": [
       "static/chunks/webpack-8fa1640cc84ba8fe.js",
