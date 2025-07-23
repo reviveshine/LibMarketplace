@@ -28,7 +28,8 @@ export default function Verify() {
         
         // Redirect to phone verification or KYC upload
         setTimeout(() => {
-          router.push('/auth/verify-phone?email=' + encodeURIComponent(email as string))
+          const type = router.query.type || 'buyer'
+          router.push(`/auth/verify-phone?email=${encodeURIComponent(email as string)}&type=${type}`)
         }, 2000)
       } else {
         setError('Please enter a valid 6-digit verification code')
