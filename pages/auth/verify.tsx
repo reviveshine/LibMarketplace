@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import Layout from '../../components/Layout'
 import VerificationForm from '../../components/auth/VerificationForm'
 import { getRedirectUrl } from '../../lib/verification'
@@ -164,12 +165,12 @@ export default function Verify() {
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <h3 className="font-medium text-gray-900 mb-2">Need Help?</h3>
               <p className="text-sm text-gray-600 mb-4">
-                Having trouble with verification? We're here to help!
+                Having trouble with verification? We&apos;re here to help!
               </p>
               <div className="flex justify-center space-x-4 text-sm">
-                <a href="/contact" className="text-blue-600 hover:text-blue-500 font-medium">
+                <Link href="/contact" className="text-blue-600 hover:text-blue-500 font-medium">
                   📧 Contact Support
-                </a>
+                </Link>
                 <span className="text-gray-300">|</span>
                 <a href="tel:+231123456789" className="text-blue-600 hover:text-blue-500 font-medium">
                   📞 Call Us

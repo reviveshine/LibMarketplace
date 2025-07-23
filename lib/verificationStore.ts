@@ -24,7 +24,8 @@ class VerificationStore {
 
   cleanup(): void {
     const now = Date.now();
-    for (const [key, data] of this.store.entries()) {
+    const entries = Array.from(this.store.entries());
+    for (const [key, data] of entries) {
       if (now > data.expires) {
         this.store.delete(key);
       }
@@ -32,12 +33,23 @@ class VerificationStore {
   }
 }
 
-// Create a singleton instance
-const verificationStore = new VerificationStore();
+// Create a singleton instance that survives Hot Module Replacement in development
+declare global {
+  var __verificationStore__: VerificationStore | undefined;
+  var __cleanupInterval__: NodeJS.Timeout | undefined;
+}
+
+const verificationStore = global.__verificationStore__ || new VerificationStore();
+
+if (process.env.NODE_ENV === 'development') {
+  global.__verificationStore__ = verificationStore;
+}
 
 // Cleanup expired codes every 5 minutes
-setInterval(() => {
-  verificationStore.cleanup();
-}, 5 * 60 * 1000);
+if (!global.__cleanupInterval__) {
+  global.__cleanupInterval__ = setInterval(() => {
+    verificationStore.cleanup();
+  }, 5 * 60 * 1000);
+}
 
 export default verificationStore;
