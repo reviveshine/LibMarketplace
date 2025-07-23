@@ -1,12 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { CountryCode } from 'libphonenumber-js'
 import Layout from '../../components/Layout'
+import PhoneInput from '../../components/auth/PhoneInput'
+import { UserType } from '../../lib/phone-validation'
 
 export default function Register() {
   const [step, setStep] = useState(1)
-  const [userType, setUserType] = useState('')
+  const [userType, setUserType] = useState<UserType>('buyer')
+  const [selectedCountry, setSelectedCountry] = useState<CountryCode>('LR')
   const [formData, setFormData] = useState({
     // Basic Info
     firstName: '',
@@ -58,8 +62,8 @@ export default function Register() {
       // Mock registration
       await new Promise(resolve => setTimeout(resolve, 1500))
       
-      // Redirect to verification page
-      router.push('/auth/verify?email=' + encodeURIComponent(formData.email))
+      // Redirect to verification page with user type
+      router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}&type=${userType}`)
       
     } catch (err) {
       setError('Registration failed. Please try again.')
@@ -108,11 +112,13 @@ export default function Register() {
   }
 
   // Get user type from URL if provided
-  const { type } = router.query
-  if (type && !userType) {
-    setUserType(type as string)
-    setStep(2)
-  }
+  useEffect(() => {
+    const { type } = router.query
+    if (type && !userType && ['buyer', 'seller'].includes(type as string)) {
+      setUserType(type as UserType)
+      setStep(2)
+    }
+  }, [router.query, userType])
 
   return (
     <Layout>
@@ -168,7 +174,7 @@ export default function Register() {
                       name="userType"
                       value="buyer"
                       checked={userType === 'buyer'}
-                      onChange={(e) => setUserType(e.target.value)}
+                      onChange={(e) => setUserType(e.target.value as UserType)}
                       className="mr-3"
                     />
                     <div>
@@ -183,7 +189,7 @@ export default function Register() {
                       name="userType"
                       value="seller"
                       checked={userType === 'seller'}
-                      onChange={(e) => setUserType(e.target.value)}
+                      onChange={(e) => setUserType(e.target.value as UserType)}
                       className="mr-3"
                     />
                     <div>
@@ -238,15 +244,14 @@ export default function Register() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Phone Number</label>
-                  <input
-                    name="phone"
-                    type="tel"
-                    required
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                  <PhoneInput
                     value={formData.phone}
-                    onChange={handleChange}
-                    className="input-field mt-1"
-                    placeholder="+231 XX XXX XXXX"
+                    onChange={(value) => setFormData(prev => ({ ...prev, phone: value }))}
+                    userType={userType}
+                    selectedCountry={selectedCountry}
+                    onCountryChange={setSelectedCountry}
+                    required
                   />
                 </div>
 
