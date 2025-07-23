@@ -15,8 +15,9 @@ export interface VerificationResult {
 // Liberian phone number validation
 export const validateLiberianPhone = (phone: string): boolean => {
   // Support +231 format and local format
-  const liberianPhoneRegex = /^(\+231|231|0)?[0-9]{8}$/;
-  return liberianPhoneRegex.test(phone.replace(/\s+/g, ''));
+  // Liberian phone numbers are typically 8 digits after country code
+  const liberianPhoneRegex = /^(\+231|231|0)[0-9]{8}$/;
+  return liberianPhoneRegex.test(phone.replace(/[\s-()]/g, ''));
 };
 
 // Email validation

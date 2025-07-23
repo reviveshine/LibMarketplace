@@ -5,6 +5,7 @@ import {
   formatLiberianPhone,
   checkRateLimit 
 } from '../../../lib/verification';
+import verificationStore from '../../../lib/verificationStore';
 
 interface VerifyCodeRequest {
   email?: string;
@@ -12,9 +13,6 @@ interface VerifyCodeRequest {
   code: string;
   type?: 'buyer' | 'seller' | 'admin';
 }
-
-// In-memory store for verification codes (should match send-verification.ts)
-const verificationStore = new Map<string, { code: string; expires: number; attempts: number }>();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {

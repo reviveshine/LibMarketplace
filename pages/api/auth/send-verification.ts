@@ -8,6 +8,7 @@ import {
   checkRateLimit,
   formatLiberianPhone 
 } from '../../../lib/verification';
+import verificationStore from '../../../lib/verificationStore';
 
 interface SendVerificationRequest {
   email?: string;
@@ -15,9 +16,6 @@ interface SendVerificationRequest {
   method: 'email' | 'sms' | 'whatsapp';
   type?: 'buyer' | 'seller' | 'admin';
 }
-
-// In-memory store for verification codes (replace with database in production)
-const verificationStore = new Map<string, { code: string; expires: number; attempts: number }>();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -60,7 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const code = generateVerificationCode();
     const expires = Date.now() + 600000; // 10 minutes
 
-    // Store verification code
+    // Store verification code in shared store
     verificationStore.set(target, { code, expires, attempts: 0 });
 
     // Send verification based on method
