@@ -19,10 +19,10 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/auth/register": [
+    "/auth/verify-phone": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/auth/register.js"
+      "static/chunks/pages/auth/verify-phone.js"
     ]
   },
   "ampFirstPages": []

@@ -36,18 +36,10 @@ export default function PhoneInput({
   name = 'phone',
   id = 'phone'
 }: PhoneInputProps) {
-  const [currentCountry, setCurrentCountry] = useState<CountryCode>(selectedCountry)
+  const [currentCountry, setCurrentCountry] = useState<CountryCode>(userType === 'seller' ? 'LR' : selectedCountry)
   const [validation, setValidation] = useState<{ isValid: boolean; error?: string; suggestion?: string }>({ isValid: false })
   const [showValidation, setShowValidation] = useState(false)
   const [carrier, setCarrier] = useState<string | undefined>()
-
-  // Auto-set Liberia for sellers
-  useEffect(() => {
-    if (userType === 'seller' && currentCountry !== 'LR') {
-      setCurrentCountry('LR')
-      onCountryChange?.('LR')
-    }
-  }, [userType, currentCountry]) // Removed onCountryChange from dependencies
 
   // Validate phone number as user types
   useEffect(() => {
