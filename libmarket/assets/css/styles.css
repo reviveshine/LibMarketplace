@@ -1,0 +1,92 @@
+/* LibMarketplace Custom Styles */
+
+/* Liberian flag gradient */
+.liberian-gradient { 
+    background: linear-gradient(135deg, #0052CC 0%, #FFFFFF 50%, #CC0000 100%); 
+}
+
+/* Cart badge animation */
+.cart-badge { 
+    animation: pulse 2s infinite; 
+}
+
+/* Product card transitions */
+.product-card { 
+    transition: all 0.3s ease; 
+}
+
+.product-card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+}
+
+/* Additional styling for responsive design */
+.hero-section {
+    background: linear-gradient(135deg, #0052CC 0%, #CC0000 100%);
+}
+
+/* Navigation active state */
+.nav-active {
+    border-bottom: 2px solid #0052CC;
+    color: #0052CC;
+}
+
+/* Custom button styles */
+.btn-primary {
+    background-color: #0052CC;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #003d99;
+}
+
+.btn-secondary {
+    background-color: #CC0000;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #990000;
+}
+
+/* Modal styles */
+.modal-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Form styles */
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #0052CC;
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+    .product-card {
+        margin-bottom: 1rem;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-section p {
+        font-size: 1.125rem;
+    }
+}

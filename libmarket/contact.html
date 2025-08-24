@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact RSH001 - LibMarketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50" x-data="libMarketplace()">
+    <header class="liberian-gradient shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="text-3xl">🇱🇷</div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">LibMarketplace</h1>
+                        <p class="text-sm text-gray-200">Authentic Liberian Products Worldwide</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <button @click="showCart = true" class="text-white hover:text-gray-200 relative">
+                        <i class="fas fa-shopping-cart text-2xl"></i>
+                        <span x-show="cartItems.length > 0" x-text="cartItems.length" 
+                              class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs cart-badge"></span>
+                    </button>
+                    <button @click="showMessages = true" class="text-white hover:text-gray-200">
+                        <i class="fas fa-comments text-2xl"></i>
+                    </button>
+                    <div class="text-white text-center">
+                        <div class="font-semibold">reviveshine</div>
+                        <div class="text-xs bg-blue-800 px-2 py-1 rounded">RSH001</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-md sticky top-20 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-8">
+                <a href="index.html" class="py-4 px-2 text-gray-600 hover:text-blue-600">🛍️ Shop Products</a>
+                <a href="about.html" class="py-4 px-2 text-gray-600 hover:text-blue-600">ℹ️ About RSH001</a>
+                <a href="contact.html" class="nav-active py-4 px-2">📞 Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-8">
+                <div class="text-6xl mb-4">📞</div>
+                <h2 class="text-3xl font-bold mb-4">Contact reviveshine (RSH001)</h2>
+                <p class="text-gray-600">
+                    Get in touch with us for product inquiries, custom orders, or general questions. 
+                    We're here to help you find the perfect authentic Liberian products.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Contact Form -->
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-xl font-bold mb-6">📝 Send us a Message</h3>
+                    <form @submit.prevent="sendMessage" class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                <i class="fas fa-user mr-2"></i>Your Name *
+                            </label>
+                            <input x-model="contactForm.name" type="text" required 
+                                   class="form-input" placeholder="Enter your full name">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                <i class="fas fa-envelope mr-2"></i>Email Address *
+                            </label>
+                            <input x-model="contactForm.email" type="email" required 
+                                   class="form-input" placeholder="your.email@example.com">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                <i class="fas fa-phone mr-2"></i>Phone Number (Optional)
+                            </label>
+                            <input x-model="contactForm.phone" type="tel" 
+                                   class="form-input" placeholder="+1 (555) 123-4567">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                <i class="fas fa-tag mr-2"></i>Subject
+                            </label>
+                            <select x-model="contactForm.subject" class="form-input">
+                                <option value="general">General Inquiry</option>
+                                <option value="product">Product Question</option>
+                                <option value="custom">Custom Order</option>
+                                <option value="shipping">Shipping Information</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="support">Customer Support</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                <i class="fas fa-comment mr-2"></i>Message *
+                            </label>
+                            <textarea x-model="contactForm.message" rows="5" required 
+                                      class="form-input" 
+                                      placeholder="Please describe your inquiry in detail..."></textarea>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input x-model="contactForm.newsletter" type="checkbox" 
+                                   class="mr-2" id="newsletter">
+                            <label for="newsletter" class="text-sm text-gray-600">
+                                Subscribe to our newsletter for updates on new products
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="w-full btn-primary text-lg">
+                            <i class="fas fa-paper-plane mr-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4">📍 Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-map-marker-alt text-blue-600 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold">Location</h4>
+                                    <p class="text-gray-600">Nimba County, Liberia</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-envelope text-blue-600 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold">Email</h4>
+                                    <p class="text-gray-600">reviveshine@mylibmarketplace.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-globe text-blue-600 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold">Website</h4>
+                                    <p class="text-gray-600">mylibmarketplace.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-id-badge text-blue-600 mt-1"></i>
+                                <div>
+                                    <h4 class="font-semibold">Seller ID</h4>
+                                    <p class="text-gray-600">RSH001 (Verified)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4">⏰ Response Times</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Email Inquiries:</span>
+                                <span class="font-semibold">Within 24 hours</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Product Questions:</span>
+                                <span class="font-semibold">Within 12 hours</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Custom Orders:</span>
+                                <span class="font-semibold">Within 48 hours</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Emergency Support:</span>
+                                <span class="font-semibold">Within 6 hours</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold mb-4">💬 Quick Contact</h3>
+                        <p class="text-gray-600 mb-4">
+                            For immediate assistance, use our messaging system:
+                        </p>
+                        <button @click="showMessages = true" class="w-full btn-secondary">
+                            <i class="fas fa-comments mr-2"></i>Open Messages
+                        </button>
+                    </div>
+
+                    <div class="bg-blue-50 rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-blue-800">🌍 International Customers</h3>
+                        <p class="text-blue-700 text-sm">
+                            We welcome customers from around the world! We offer international shipping 
+                            and can accommodate different time zones for communication. Please include 
+                            your country and preferred communication time in your message.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="mt-12 bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-center mb-8">❓ Frequently Asked Questions</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold mb-2">Do you ship internationally?</h4>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Yes! We ship authentic Liberian products worldwide. Shipping costs and times vary by location.
+                        </p>
+                        
+                        <h4 class="font-semibold mb-2">Are your products authentic?</h4>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Absolutely. All products are sourced directly from verified Liberian artisans and are 100% authentic.
+                        </p>
+                        
+                        <h4 class="font-semibold mb-2">Can I request custom items?</h4>
+                        <p class="text-gray-600 text-sm">
+                            Yes! We work with local artisans to create custom pieces. Contact us with your requirements.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold mb-2">What payment methods do you accept?</h4>
+                        <p class="text-gray-600 text-sm mb-4">
+                            We accept major credit cards, PayPal, and bank transfers for international orders.
+                        </p>
+                        
+                        <h4 class="font-semibold mb-2">How long does shipping take?</h4>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Shipping times vary: 7-14 days for express, 14-21 days for standard international shipping.
+                        </p>
+                        
+                        <h4 class="font-semibold mb-2">Do you offer returns?</h4>
+                        <p class="text-gray-600 text-sm">
+                            Yes, we offer returns for damaged items or if the product doesn't match the description.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Shopping Cart Modal -->
+    <div x-show="showCart" @click.away="showCart = false" class="fixed inset-0 modal-overlay flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold">🛒 Shopping Cart</h3>
+                    <button @click="showCart = false" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div x-show="cartItems.length === 0" class="text-center py-8">
+                    <div class="text-6xl mb-4">🛒</div>
+                    <p class="text-gray-600">Your cart is empty</p>
+                    <a href="index.html" class="btn-primary mt-4 inline-block">Browse Products</a>
+                </div>
+                <div x-show="cartItems.length > 0">
+                    <div class="space-y-4 mb-6">
+                        <template x-for="item in cartItems" :key="item.id">
+                            <div class="flex items-center justify-between border-b pb-4">
+                                <div>
+                                    <h4 class="font-semibold" x-text="item.name"></h4>
+                                    <p class="text-gray-600" x-text="'$' + item.price"></p>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button @click="updateQuantity(item.id, item.quantity - 1)" class="bg-gray-200 px-2 py-1 rounded">-</button>
+                                    <span x-text="item.quantity"></span>
+                                    <button @click="updateQuantity(item.id, item.quantity + 1)" class="bg-gray-200 px-2 py-1 rounded">+</button>
+                                    <button @click="removeFromCart(item.id)" class="text-red-600 ml-4"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="border-t pt-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xl font-bold">Total: $<span x-text="cartTotal"></span></span>
+                        </div>
+                        <button @click="checkout()" class="w-full bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700">
+                            <i class="fas fa-credit-card mr-2"></i>Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Messages Modal -->
+    <div x-show="showMessages" @click.away="showMessages = false" class="fixed inset-0 modal-overlay flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-96">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold">💬 Messages</h3>
+                    <button @click="showMessages = false" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="space-y-4 max-h-64 overflow-y-auto mb-4">
+                    <template x-for="message in messages" :key="message.id">
+                        <div class="border rounded p-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold text-blue-600" x-text="message.from"></span>
+                                <span class="text-sm text-gray-500" x-text="message.time"></span>
+                            </div>
+                            <p x-text="message.text"></p>
+                        </div>
+                    </template>
+                </div>
+                <div class="flex space-x-2">
+                    <input x-model="newMessage" @keyup.enter="sendQuickMessage()" placeholder="Type message..." class="flex-1 form-input">
+                    <button @click="sendQuickMessage()" class="btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-xl font-bold mb-4">🇱🇷 LibMarketplace</h3>
+            <p class="text-gray-300 mb-4">Authentic Liberian products from Nimba County to the world</p>
+            <p class="text-gray-400">© 2025 LibMarketplace | Powered by reviveshine (RSH001)</p>
+            <p class="text-sm text-gray-500 mt-2">Built: 2025-07-17 03:21:12 UTC | Ready for Global Customers</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
